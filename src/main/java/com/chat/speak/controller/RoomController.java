@@ -21,7 +21,7 @@ public class RoomController {
     public String listPatients(final Model model) {
         model.addAttribute("title", "All Rooms");
         model.addAttribute("rooms", roomRepository.findAll());
-        return "main/start";
+        return "room/list";
     }
 
 }

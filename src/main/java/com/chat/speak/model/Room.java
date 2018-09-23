@@ -21,7 +21,8 @@ public class Room {
     private Long id;
     @Column(nullable = false)
     private String name;
-
+    @Column(nullable = false)
+    private Long dateCreate = System.currentTimeMillis();
     private String creatorLogin;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "room")
     private List<ChatUser> users;

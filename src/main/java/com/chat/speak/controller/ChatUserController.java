@@ -21,6 +21,6 @@ public class ChatUserController {
     public String listPatients(final Model model) {
         model.addAttribute("title", "All Users");
         model.addAttribute("users", chatUserRepository.findAll());
-        return "main/start";
+        return "user/list";
     }
 }

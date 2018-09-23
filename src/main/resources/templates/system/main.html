@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <head th:replace="/fragments/head :: head"></head>
+</head>
+<body id="main">
+<div id="myList" class="sidenav">
+    <ul>
+        <li><a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a></li>
+        <li><a th:href="@{/system/profile}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Profile</a></li>
+        <li><a th:href="@{/room/list}"><span class="glyphicon glyphicon-transfer" aria-hidden="true"></span> Rooms</a></li>
+        <li><a th:href="@{/user/list}"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Users</a></li>
+        <li><a th:href="@{/logout}"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout</a></li>
+    </ul>
+</div>
+
+<div id="open" onclick="openNav()"><p><span class="glyphicon glyphicon-chevron-right" aria-hidden="true" ></span></p></div>
+<div id="main-content">
+    <div th:replace="/room/list::rooms"></div>
+    <div th:replace="/user/list::users"></div>
+    <div th:include="/system/profile::profile"></div>
+</div>
+
+<footer th:replace="/fragments/footer::footer"></footer>
+</body>
+</html>

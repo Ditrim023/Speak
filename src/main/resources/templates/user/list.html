@@ -1,24 +1,35 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<th:block th:fragment="users">
-    <div id="list-table">
-        <!--<h2 class="text-center">Rooms</h2>-->
-        <div class="text-center" th:if="${not #lists.isEmpty(users)}">
-            <table class="table table-borderless" id="sort">
-                <thead>
-                <tr class="info">
-                    <th class="text-center"><a href="#">Id</a></th>
-                    <th class="text-center"><a href="#">Name</a></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr class="text-center" th:each="user : ${users}">
-                    <!--<td><a th:href="${'/patient/info/' + patient.id}" th:text="${patient.id}"></a></td>-->
-                    <td th:text="${user.id}">Id</td>
-                    <td th:text="${user.login}">Name</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+<head>
+    <meta charset="UTF-8"/>
+    <head th:replace="/fragments/head :: head"></head>
+</head>
+<body id="main">
+<div th:replace="/fragments/sidebar :: bar"></div>
+
+<div th:if="${not #lists.isEmpty(users)}">
+    <h2 class="text-center">All Users</h2>
+    <div id="list">
+        <table class="table table-hover" id="sort">
+            <thead>
+            <tr class="info">
+                <th class="text-center">Login</th>
+                <th class="text-center">Email</th>
+                <th class="text-center">Gender</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="text-center" th:each="user : ${users}">
+                <!--<td><a th:href="${'/patient/info/' + patient.id}" th:text="${patient.id}"></a></td>-->
+                <td th:text="${user.login}">login</td>
+                <td th:text="${user.email}">Email</td>
+                <td th:text="${user.gender}">Gender</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-</th:block>
+</div>
+<footer th:replace="/fragments/footer::footer"></footer>
+</body>
 </html>
+
