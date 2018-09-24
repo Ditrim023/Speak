@@ -96,12 +96,34 @@ a:hover{
 #input-login,#input-password,#input-id,#input-email{
     width: 90%;
     margin: 0 auto;
-    /*
-
-        margin-bottom: 10px;
-        float:left;
-    */
 }
+
+#login-form h2{
+    text-align: center;
+    color: #818181;
+}
+#login-form{
+    background-color: black;
+    width: 700px;
+    margin: 200px auto 2px auto;
+    height: 300px;
+    border-radius: 10px;
+    box-shadow: 9px 6px 23px 0px rgba(0,0,0,0.75);
+}
+#login-form button{
+    margin-left: 215px;
+}
+#login-form input{
+    margin-bottom: 30px;
+    margin-top: 15px;
+}
+#container-login{
+    padding-top: 30px;
+    width: 525px;
+    margin-left: 87px;
+}
+
+
 .sidenav .closebtn {
     position: absolute;
     top: 0;
