@@ -1,12 +1,16 @@
 package com.chat.speak.controller;
 
-import com.chat.speak.repository.RoomRepository;
+import com.chat.speak.model.Comment;
+import com.chat.speak.model.Room;
+import com.chat.speak.repository.CommentRepository;
+import com.chat.speak.services.RoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Nikita Krutoguz
@@ -15,13 +19,32 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class RoomController {
 
-    private final RoomRepository roomRepository;
+    private final RoomService roomService;
+    private final CommentRepository commentRepository;
+
 
     @RequestMapping(value = "/room/list", method = RequestMethod.GET)
-    public String listPatients(final Model model) {
+    public String listRooms(final Model model) {
         model.addAttribute("title", "All Rooms");
-        model.addAttribute("rooms", roomRepository.findAll());
+        model.addAttribute("rooms", roomService.findAll());
         return "room/list";
     }
+
+    @RequestMapping(path = "/room/chat/{id}", method = RequestMethod.GET)
+    public String infoRoom(final Model model, @PathVariable("id") final Long id) {
+        final Room room = roomService.findOne(id);
+        model.addAttribute("room", room);
+        model.addAttribute("comment", new Comment());
+        model.addAttribute("comments", room.getComments());
+        model.addAttribute("title", room.getName());
+        return "room/chat";
+    }
+
+    @RequestMapping(value = "/comment/save/", method = RequestMethod.POST)
+    public final String saveComment(final @RequestParam Long id, final @RequestParam String text) {
+        roomService.saveComment(id, text);
+        return "redirect:/room/chat/" + id;
+    }
+
 
 }

@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
 @Configuration
@@ -31,8 +30,7 @@ public class ProfileConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().
                 authorizeRequests()
                 .antMatchers("/index").permitAll()
-                .antMatchers("/user/list","/room/list","/profile","/system/main").hasAnyRole("ADMIN", "USER")
-                .and().exceptionHandling().accessDeniedPage("/403")
+                .antMatchers("/user/list", "/room/list", "/profile", "/system/main").hasAnyRole("ADMIN", "USER")
                 .and().formLogin()
                 .loginPage("/login").failureUrl("/")
                 .loginProcessingUrl("/j_spring_security_check")
@@ -40,8 +38,10 @@ public class ProfileConfig extends WebSecurityConfigurerAdapter {
                 .passwordParameter("password")
                 .defaultSuccessUrl("/profile")
                 .and().logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login");
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login")
+                .invalidateHttpSession(true)
+                .and().exceptionHandling().accessDeniedPage("/403");
 
     }
 

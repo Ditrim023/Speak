@@ -14,13 +14,14 @@
             <tr class="info">
                 <th class="text-center">Name</th>
                 <th class="text-center">Date Create</th>
+                <th class="text-center">Enter</th>
             </tr>
             </thead>
             <tbody>
             <tr class="text-center" th:each="room : ${rooms}">
-                <!--<td><a th:href="${'/patient/info/' + patient.id}" th:text="${patient.id}"></a></td>-->
                 <td th:text="${room.name}">Name</td>
                 <td class="text-center" th:text="${#dates.format(room.dateCreate, 'dd.MM.yyyy HH:mm')}"></td>
+                <td><a th:href="${'chat/' + room.id}"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
             </tr>
             </tbody>
         </table>

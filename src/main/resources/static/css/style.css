@@ -1,8 +1,7 @@
 /*@import url(reset.css);*/
 
 body {
-    /*background: linear-gradient(to right, rgb(173, 169, 150), rgb(242, 242, 242), rgb(219, 219, 219), rgb(234, 234, 234));*/
-
+    /*    background: linear-gradient(to right, rgb(173, 169, 150), rgb(242, 242, 242), rgb(219, 219, 219), rgb(234, 234, 234));*/
 }
 li {
     list-style-type: none;
@@ -22,82 +21,139 @@ a:hover{
     margin-right: 15px;
     margin-top: 1px;
 }
-#list{
-    margin: 0 150px 15px 150px;
+/*-------------------------------------------------------------------------------------*/
+
+.js-pscroll {
+    position: relative;
+}
+
+#messages .ps__rail-y {
+    width: 9px;
+    background-color: transparent;
+    /*  opacity: 1 !important;*/
+    right: 5px;
+}
+
+#messages .ps__rail-y::before {
+    display: block;
+    position: absolute;
+    background-color: #ebebeb;
+    border-radius: 5px;
+    width: 100%;
+}
+
+#messages .ps__rail-y .ps__thumb-y {
+    width: 100%;
+    right: 0;
+    background-color: transparent;
+}
+
+#messages .ps__rail-y .ps__thumb-y::before {
+    content: "";
+    position: absolute;
+    background-color: #cccccc;
+    border-radius: 5px;
+    width: 100%;
+    height: calc(100% - 30px);
+    left: 0;
+    top: 15px;
+}
+
+#messages .ps__rail-y::before {
+    /*  background-color: #4e4e4e;*/
+}
+
+#messages .ps__rail-y .ps__thumb-y::before {
+    background-color: #778bf3;
+}
+#messages{
+    margin: -40px 100px 15px 100px;
     border-radius: 10px;
     background-color: #393939;
-    overflow: hidden;
+    overflow: auto;
     font-size: 14px;
+    height: 760px;
+    position: relative;
 }
-#list table{
+
+#messages table {
     margin-bottom: 1px;
 }
-#list td{
-    text-align: center;
+
+#messages a{
+    color: #3fff7f;
+}
+
+#messages td {
+    margin-left: 15px;
     color: #818181;
     border: none;
     background-color: #222;
-
 }
-#list th{
+
+#messages th {
     font-size: 15px;
     border: none;
     text-align: center;
     text-transform: uppercase;
-    color: #00ad5f;
+    color: #778bf3;
 }
-.sidenav {
-    height: 100%;
-    width: 0;
+/*-----------------------------------------------------------------------------------------*/
+#input-box {
+    left: 600px;
+    background-color:#393939;
+    width: 940px;
+    bottom: 3px;
     position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    padding-top: 125px;
 }
 
-.sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-}
-
-.sidenav a:hover {
-    color: #f1f1f1;
-}
-#rooms-list,#user-list{
-    width: 500px;
-    margin-left: 300px;
-}
-
-#input-form button {
-    margin: 10px 0px 25px 44%;
-}
-#profile-form h2{
-    padding-top: 15px;
-
-}
-#profile-form{
-    width: 50%;
-    color: #818181;
-    background-color: #111;
-    margin: 1px 2% 3px 25%;
-    box-shadow: 9px 6px 23px 0px rgba(0,0,0,0.75);
-    border-radius: 12px;
-}
-#profile-form label {
-    margin-left:5%;
-}
-
-#input-login,#input-password,#input-id,#input-email{
+#field{
+    overflow: hidden;
+    margin: 20px 15px;
     width: 90%;
-    margin: 0 auto;
+    float: left;
+    margin-right: 10px;
+
+}
+#send{
+    margin-right: 5px;
+    margin-top: 20px;
 }
 
+
+/*-------------------------------------------------------------------------------*/
+#list{
+    margin: 0 150px 15px 150px;
+    border-radius: 10px;
+    background-color: #393939;
+    overflow: auto;
+    font-size: 14px;
+    max-height: 700px;
+    position: relative;
+}
+
+#list table {
+    margin-bottom: 1px;
+}
+
+#list td {
+    text-align: center;
+    color: #818181;
+    border: none;
+    background-color: #222;
+}
+
+#list th {
+    font-size: 15px;
+    border: none;
+    text-align: center;
+    text-transform: uppercase;
+    color: #778bf3;
+}
+
+
+
+/*-------------------------------------------------------------------------------*/
 #login-form h2{
     text-align: center;
     color: #818181;
@@ -105,7 +161,7 @@ a:hover{
 #login-form{
     background-color: black;
     width: 700px;
-    margin: 200px auto 2px auto;
+    margin: 250px auto 2px auto;
     height: 300px;
     border-radius: 10px;
     box-shadow: 9px 6px 23px 0px rgba(0,0,0,0.75);
@@ -123,6 +179,29 @@ a:hover{
     margin-left: 87px;
 }
 
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
 
 .sidenav .closebtn {
     position: absolute;
@@ -137,6 +216,12 @@ a:hover{
     .sidenav a {font-size: 18px;}
 }
 
+#upper{
+    background-color: green;
+    height: 55px;
+    margin-top: -10px;
+}
+
 #open p{
     width: 250px;
     color: #000;
@@ -146,10 +231,54 @@ a:hover{
     cursor: pointer;
 }
 
+#top-list ul li{
+    float: left;
+    color: white;
+    border-right: 1px solid #5f5a5a;
+    height: 55px;
+    padding: 7px 20px 3px 20px;
+}
+#top-list ul li:first-child{
+    border-left: 1px solid #5f5a5a;
+}
+#top-list{
+    margin-left: 42%;
+    font-size:25px;
+}
 .table.table-borderless td, .table.table-borderless th {
     border: 0 !important;
 }
 
 .table>thead>tr.info>th {
     background-color: transparent;
+}
+
+
+#input-form button {
+    margin: 10px 0px 25px 44%;
+}
+#profile-form h2{
+    padding-top: 15px;
+
+}
+#profile-form{
+    width: 50%;
+    color: #818181;
+    background-color: #111;
+    margin: 1px 2% 3px 23%;
+    box-shadow: 9px 6px 23px 0px rgba(0,0,0,0.75);
+    border-radius: 12px;
+}
+#profile-form label {
+    margin-left:5%;
+}
+
+#input-login,#input-password,#input-id,#input-email{
+    width: 90%;
+    margin: 0 auto;
+    /*
+
+        margin-bottom: 10px;
+        float:left;
+    */
 }

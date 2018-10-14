@@ -1,0 +1,13 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="chat">
+    <div id="messages">
+        <table class="table">
+            <tbody class="js-pscroll">
+            <tr th:each="comment : ${comments}">
+                <td><a th:text="*{comment.author}"></a>: <span th:text="*{comment.text}"></span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</th:block>
+</html>

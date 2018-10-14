@@ -22,8 +22,10 @@ public class ChatUser {
     private String login;
     @Column(nullable = false)
     private String email;
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private Gender gender;
+    @Column(nullable = false)
+    private Status status = Status.OFFLINE;
     @Column(nullable = false)
     private String password;
     @ManyToOne(fetch = FetchType.EAGER)
@@ -31,6 +33,8 @@ public class ChatUser {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "roleId")
     private UserRole role;
+    private Boolean confirm;
+    private String token;
 
     public ChatUser(String login, String email, Gender gender) {
         this.login = login;
@@ -43,6 +47,14 @@ public class ChatUser {
         this.email = email;
         this.gender = gender;
         this.password = password;
-        this.role = role;
+    }
+
+    public ChatUser(String login, String email, Gender gender, String password, Boolean confirm, String token) {
+        this.login = login;
+        this.email = email;
+        this.gender = gender;
+        this.password = password;
+        this.confirm = confirm;
+        this.token = token;
     }
 }

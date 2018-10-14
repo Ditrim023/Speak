@@ -11,7 +11,10 @@ import org.springframework.stereotype.Repository;
  * @author Nikita Krutoguz
  */
 @Repository
-public interface ChatUserRepository extends CrudRepository<ChatUser,Long> {
+public interface ChatUserRepository extends JpaRepository<ChatUser,Long> {
     @Query(value = "SELECT u FROM ChatUser u WHERE u.login = :login")
     ChatUser findChatUserByLogin(final @Param("login") String login);
+
+    @Query(value = "SELECT u FROM ChatUser u WHERE u.token = :token")
+    ChatUser findChatUserByToken(final @Param("token") String token);
 }

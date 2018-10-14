@@ -2,7 +2,9 @@ package com.chat.speak.security;
 
 
 import com.chat.speak.model.ChatUser;
+import com.chat.speak.model.Status;
 import com.chat.speak.repository.ChatUserRepository;
+import com.chat.speak.services.ChatUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,14 +22,16 @@ import java.util.Set;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserService implements UserDetailsService {
 
-    private final ChatUserRepository chatUserRepository;
+    private final ChatUserService chatUserService;
 
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        final ChatUser user = chatUserRepository.findChatUserByLogin(userName);
+        final ChatUser user = chatUserService.findUserByLogin(userName);
         if (user == null) {
             throw new UsernameNotFoundException("User " + userName + " does not exist");
         }
         Set<GrantedAuthority> roles = new HashSet<>();
+        user.setStatus(Status.ONLINE);
+        chatUserService.save(user);
         roles.add(new SimpleGrantedAuthority(user.getRole().getRole()));
         return new org.springframework.security.core.userdetails.User(user.getLogin(), user.getPassword(), roles);
     }

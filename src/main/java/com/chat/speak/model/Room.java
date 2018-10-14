@@ -26,6 +26,8 @@ public class Room {
     private String creatorLogin;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "room")
     private List<ChatUser> users;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "room")
+    private List<Comment> comments;
 
     public Room(String name) {
         this.name = name;

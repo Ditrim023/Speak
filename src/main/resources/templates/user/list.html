@@ -16,6 +16,7 @@
                 <th class="text-center">Login</th>
                 <th class="text-center">Email</th>
                 <th class="text-center">Gender</th>
+                <th class="text-center">Status</th>
             </tr>
             </thead>
             <tbody>
@@ -24,6 +25,7 @@
                 <td th:text="${user.login}">login</td>
                 <td th:text="${user.email}">Email</td>
                 <td th:text="${user.gender}">Gender</td>
+                <td class="status" th:text="${user.status}">Status</td>
             </tr>
             </tbody>
         </table>

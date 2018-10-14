@@ -1,13 +1,12 @@
 package com.chat.speak.repository;
 
-import com.chat.speak.model.Room;
+import com.chat.speak.model.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 /**
  * @author Nikita Krutoguz
  */
 @Repository
-public interface RoomRepository extends JpaRepository<Room, Long> {
+public interface CommentRepository extends JpaRepository<Comment,Long> {
 }
