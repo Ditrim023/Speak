@@ -1,3 +1,15 @@
+window.onload = function(){
+    var status = document.getElementsByClassName('status');
+    for (var i = 0; i < status.length; i++) {
+        if(status[i].innerHTML=="ONLINE"){
+            status[i].style.color = "green";
+        }else{
+            status[i].style.color = "red";
+        }
+    }
+
+}
+
 function openNav() {
     document.getElementById("myList").style.width = "250px";
     document.getElementById("main").style.marginLeft = "250px";
@@ -14,16 +26,6 @@ openNav();
 
 
 
-window.onload = function(){
-    var status = document.getElementsByClassName('status');
-    for (var i = 0; i < status.length; i++) {
-      if(status[i].innerHTML=="ONLINE"){
-          status[i].style.color = "green";
-      }else{
-          status[i].style.color = "red";
-      }
-    }
 
-}
 
 openNav();

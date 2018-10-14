@@ -3,6 +3,7 @@ package com.chat.speak.controller;
 import com.chat.speak.model.ChatUser;
 import com.chat.speak.model.Gender;
 import com.chat.speak.repository.UserRoleRepository;
+import com.chat.speak.security.UserService;
 import com.chat.speak.services.ChatUserService;
 import com.chat.speak.util.Util;
 import lombok.RequiredArgsConstructor;
@@ -40,6 +41,7 @@ public class SecurityController {
 
     private final ChatUserService chatUserService;
     private final UserRoleRepository userRoleRepository;
+    private UserService userDetailsService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
@@ -91,12 +93,12 @@ public class SecurityController {
     public final String registrationConfirm(final Model model,@RequestParam("token") final String token) {
         ChatUser chatUser = chatUserService.findChatUserByToken(token);
         if (chatUser == null){
-            return "error";
+            return "/system/error";
         }
         chatUser.setConfirm(true);
         chatUserService.save(chatUser);
-        model.addAttribute("currentUser", chatUser);
-        return "/system/profile";
+        model.addAttribute("hello", "Now you can enter in your acc");
+        return "/system/login";
     }
 
 }

@@ -46,12 +46,6 @@ public class ChatUserService {
         return chatUserRepository.findChatUserByToken(token);
     }
 
-    public final void changeConfirm(String token){
-        final ChatUser chatUser = findChatUserByToken(token);
-        chatUser.setConfirm(true);
-        chatUserRepository.save(chatUser);
-    }
-
     public final SimpleMailMessage req(@RequestParam String login, @RequestParam String email, @RequestParam String password, final HttpServletRequest request){
         String newToken = UUID.randomUUID().toString();
         ChatUser chatUser = new ChatUser(login, email, Gender.MALE, new BCryptPasswordEncoder(10).encode(password),false,newToken);
@@ -64,12 +58,5 @@ public class ChatUserService {
         message.setText("Please go to this link " + appUrl);
         return message;
     }
-//    public void authWithoutPassword(User user) {
-//        List<Privilege> privileges = user.getRoles().stream().map(role -> role.getPrivileges()).flatMap(list -> list.stream()).distinct().collect(Collectors.toList());
-//        List<GrantedAuthority> authorities = privileges.stream().map(p -> new SimpleGrantedAuthority(p.getName())).collect(Collectors.toList());
-//
-//        Authentication authentication = new UsernamePasswordAuthenticationToken(user, null, authorities);
-//
-//        SecurityContextHolder.getContext().setAuthentication(authentication);
-//    }
+
 }
