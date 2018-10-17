@@ -4,7 +4,6 @@ db.properties
 .mtj.tmp/
 
 .idea/
-.mvn/
 target/
 out/
 
