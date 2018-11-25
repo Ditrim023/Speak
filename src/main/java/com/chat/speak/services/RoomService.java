@@ -33,19 +33,11 @@ public class RoomService {
         final Room room = roomRepository.findOne(roomId);
         String author = chatUserService.findUserByLogin(Util.getAuthorizedUserName()).getLogin();
         commentRepository.save(new Comment(text,room,author));
-        if (roomId==1L){
-            saveCommentFromBot();
-        }
-
     }
 
-    public final void saveCommentFromBot(){
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        final Room room = roomRepository.findOne(1L);
-        commentRepository.save(new Comment("hello from Bot",room,"Bot"));
+    public final void saveCommentFromBot(final Long roomId, final String text) {
+        final Room room = roomRepository.findOne(roomId);
+        String author = "RudeBot";
+        commentRepository.save(new Comment(text,room,author));
     }
 }

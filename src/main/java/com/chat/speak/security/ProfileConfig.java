@@ -30,7 +30,7 @@ public class ProfileConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().
                 authorizeRequests()
                 .antMatchers("/index").permitAll()
-                .antMatchers("/user/list", "/room/list", "/profile", "/system/main").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/user/list", "/room/list", "/profile", "/system/main","/room/chat/{id}").hasAnyRole("ADMIN", "USER")
                 .and().formLogin()
                 .loginPage("/login").failureUrl("/")
                 .loginProcessingUrl("/j_spring_security_check")

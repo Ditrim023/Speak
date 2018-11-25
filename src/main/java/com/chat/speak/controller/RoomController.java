@@ -2,12 +2,9 @@ package com.chat.speak.controller;
 
 import com.chat.speak.model.Comment;
 import com.chat.speak.model.Room;
-import com.chat.speak.repository.CommentRepository;
 import com.chat.speak.services.RoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +17,6 @@ import org.springframework.web.bind.annotation.*;
 public class RoomController {
 
     private final RoomService roomService;
-    private final CommentRepository commentRepository;
-
 
     @RequestMapping(value = "/room/list", method = RequestMethod.GET)
     public String listRooms(final Model model) {

@@ -6,13 +6,22 @@
 </head>
 <body id="main">
 <div th:replace="/fragments/sidebar :: bar"></div>
-<div th:replace="/room/table-chat :: chat"></div>
+<!--<div th:replace="/room/table-chat :: chat"></div>-->
+<div id="messages">
+    <table class="table">
+        <tbody class="js-pscroll">
+        <tr id="out" th:each="comment : ${comments}">
+            <td><a th:text="*{comment.author}"></a>: <span th:text="*{comment.text}"></span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 <div id="input-box">
     <form id="save-comment" role="form" th:object="${comment}" th:action="@{/comment/save/}" method="post">
          <span><input type="hidden" class="form-input" name="id" th:value="${room.id}"
          /></span>
-    <input id="field" name="text" th:field="*{text}" class="form-control" type="text" autocomplete="off"/>
-    <button id="send" class="btn btn-primary">Send</button>
+        <input id="field" name="text" th:field="*{text}" class="form-control" type="text" autocomplete="off"/>
+        <button id="send" class="btn btn-primary" th:onclick="'getIdRoom(' + ${room.id} + ')'">Send</button>
     </form>
 </div>
 <footer th:replace="/fragments/footer::footer"></footer>
