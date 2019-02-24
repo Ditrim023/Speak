@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * @author Nikita Krutoguz
  */
-public interface PhraseRepository extends JpaRepository<Phrase, Long>{
+public interface PhraseRepository extends JpaRepository<Phrase,Long> {
 }

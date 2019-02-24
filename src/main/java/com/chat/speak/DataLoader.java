@@ -1,7 +1,10 @@
 package com.chat.speak;
 
 import com.chat.speak.model.*;
-import com.chat.speak.repository.*;
+import com.chat.speak.repository.ChatUserRepository;
+import com.chat.speak.repository.PhraseRepository;
+import com.chat.speak.repository.RoomRepository;
+import com.chat.speak.repository.UserRoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -23,7 +26,6 @@ public class DataLoader implements ApplicationRunner {
     private final RoomRepository roomRepository;
     private final ChatUserRepository chatUserRepository;
     private final UserRoleRepository userRoleRepository;
-//    private final RoomBotRepository roomBotRepository;
     private final PhraseRepository phraseRepository;
     private final UserRole admin = new UserRole("ROLE_ADMIN");
     private final UserRole chatUser = new UserRole("ROLE_USER");
@@ -40,16 +42,17 @@ public class DataLoader implements ApplicationRunner {
     }
 
     public void insertUsers() {
-        ChatUser chatUser1 = new ChatUser("user0", "ditrim023@ukr.net", Gender.MALE,new BCryptPasswordEncoder(10).encode("123456"),true, UUID.randomUUID().toString());
+        ChatUser chatUser1 = new ChatUser("user0", "ditrim023@ukr.net", Gender.MALE, new BCryptPasswordEncoder(10).encode("123456"), true, UUID.randomUUID().toString());
         chatUser1.setRole(userRoleRepository.findOne(1L));
         chatUsers.add(chatUser1);
-        ChatUser chatUser2 = new ChatUser("user1", "ditrim020@ukr.net", Gender.FEMALE,new BCryptPasswordEncoder(10).encode("123456"),true,UUID.randomUUID().toString());
+        ChatUser chatUser2 = new ChatUser("user1", "ditrim020@ukr.net", Gender.FEMALE, new BCryptPasswordEncoder(10).encode("123456"), true, UUID.randomUUID().toString());
         chatUser2.setRole(userRoleRepository.findOne(2L));
         chatUsers.add(chatUser2);
         chatUserRepository.save(chatUsers);
 
     }
-    public void insertRoles(){
+
+    public void insertRoles() {
         userRoleRepository.save(admin);
         userRoleRepository.save(chatUser);
     }
@@ -65,7 +68,7 @@ public class DataLoader implements ApplicationRunner {
 //        roomBotRepository.save(roomBotRude);
 //    }
 
-    public void insertPhrases(){
+    public void insertPhrases() {
         rudePhrases.add(new Phrase("back off!"));
         rudePhrases.add(new Phrase("moron"));
         rudePhrases.add(new Phrase("idiot"));

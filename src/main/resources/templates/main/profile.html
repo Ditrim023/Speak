@@ -1,0 +1,50 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="profile">
+    <div id="person-form">
+        <h2 class="text-center">Edit Doctor</h2>
+        <form id="input-form" th:action="@{/doctor/update}" method="post">
+            <div class="form-group">
+                <label>Id:</label>
+                <input id="input-id" class="form-control" th:value="${doctor.id}"  name="id" placeholder="Id" readonly="readonly"/>
+            </div>
+            <div class="form-group">
+                <label for="input-name">Name:</label>
+                <input id="input-name" class="form-control" name="name" th:value="${doctor.name}" placeholder="Name"/>
+            </div>
+            <div class="form-group">
+                <label for="input-surname">Surname:</label>
+                <input id="input-surname" class="form-control"  name="surname" th:value="${doctor.surname}" placeholder="Surname"/>
+            </div>
+            <div class="form-group">
+                <label for="input-login">Login:</label>
+                <input id="input-login" class="form-control"  name="login" th:value="${doctor.login}" placeholder="Login"/>
+            </div>
+            <div class="form-group">
+                <label for="input-password">New Password:</label>
+                <input id="input-password" class="form-control" name="password"  placeholder="New Password" />
+            </div>
+            <div class="form-group">
+                <label for="input-position">Position:</label>
+                <input id="input-position" class="form-control" name="position" th:value="${doctor.position}" placeholder="Position" />
+            </div>
+
+            <div class="form-group">
+                <label>Status:</label>
+                <select id="input-status" class="form-control" name="status">
+                    <option th:each="status : ${statuses}"
+                            th:value="${status.id}"
+                            th:text="${status.name}"
+                            th:selected="${status.id==doctor.status.id}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="input-datebirth">DateBirth:</label>
+                <input id="input-datebirth" class="form-control" type="text" name="dateBirth" th:value="${doctor.dateBirth}" placeholder="DateBirth" autocomplete="off"/>
+            </div>
+            <button class="btn btn-primary">Edit
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+            </button>
+        </form>
+    </div>
+</th:block>
+</html>
