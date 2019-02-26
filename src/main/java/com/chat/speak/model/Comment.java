@@ -24,9 +24,12 @@ public class Comment {
     @Lob
     @Type(type = "org.hibernate.type.TextType")
     private String text;
-
+    @Column(nullable = false, insertable = false, updatable = false)
+    private Long roomId;
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "roomId")
     private Room room;
+
 
     private String author;
 
