@@ -37,14 +37,14 @@ public class RoomService {
     public final void saveComment(final Long roomId, final String text) {
         final Room room = roomRepository.findOne(roomId);
         String author = chatUserService.findUserByLogin(Util.getAuthorizedUserName()).getLogin();
-        commentRepository.save(new Comment(text,room,author));
+        commentRepository.save(new Comment(text, room, author));
         addJson(roomId);
     }
 
     public final void saveCommentFromBot(final Long roomId, final String text) {
         final Room room = roomRepository.findOne(roomId);
         String author = "RudeBot";
-        commentRepository.save(new Comment(text,room,author));
+        commentRepository.save(new Comment(text, room, author));
         addJson(roomId);
     }
 
@@ -52,15 +52,18 @@ public class RoomService {
         List<Comment> commentList = commentRepository.findAllUserByRoleId(id);
         Gson GSON = new GsonBuilder().setPrettyPrinting().create();
         CommentJsonData commentJsonData = new CommentJsonData();
-        try (FileWriter file = new FileWriter("src/main/resources/templates/json/" + id + "json.json")) {
+        try (FileWriter file = new FileWriter("src/main/resources/templates/json/" + id + "room.json")) {
             file.write("[");
-                for (int i = 0 ; i < commentList.size(); i++) {
-                    commentJsonData.setAuthor(commentList.get(i).getAuthor());
-                    commentJsonData.setText(commentList.get(i).getText());
-                    String json = GSON.toJson(commentJsonData);
-                    file.write(json);
-                    file.write(",");
+            for (int i = 0; i < commentList.size(); i++) {
+                commentJsonData.setAuthor(commentList.get(i).getAuthor());
+                commentJsonData.setText(commentList.get(i).getText());
+                String json = GSON.toJson(commentJsonData);
+                file.write(json);
+                if (i == commentList.size() - 1) {
+                    continue;
                 }
+                file.write(",");
+            }
             file.write("]");
         } catch (IOException e) {
             e.printStackTrace();
