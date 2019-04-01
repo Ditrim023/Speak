@@ -9,35 +9,42 @@
 // ourRequest.send();
 // // ourRequest.open('GET','1room.json');
 
-setInterval((function(){
-    $.getJSON('http://localhost:8080/json/1room', function(data) {
-        $.each(data,function (key,value) {
-            var test=
-                '<p>'+value.text+'--'+
-                value.author+'</p>'+ '<br>'
+// setInterval((function(){
+//     $.getJSON('http://localhost:8080/json/1room', function(data) {
+//         $.each(data,function (key,value) {
+//             var test=
+//                 '<p>'+value.text+'--'+
+//                 value.author+'</p>'+ '<br>'
+//
+//
+//         })
+//         console.log(data.length);
+//     });
+// }),5000);
+//---------------------------------------------------------------------
 
+setInterval((function () {
+   $.getJSON('http://localhost:8080/json/1room', function (data) {
+       var countElemFromJson = data.length;
+       var countElemFromPage = document.getElementById('out').getElementsByTagName('tr').length;
+       if (countElemFromJson != countElemFromPage) {
+           var diff = countElemFromJson - countElemFromPage;
+           var result = data.slice(-diff);
+               $.each(result, function (key, value) {
+                   $('#out').append('<tr>'+'<td>'+'<a>' + value.author +'</a>'+ ': ' +'<span>'+ value.text + '</span>'+'</td>'+'</tr>'+'<br>');
+               })
+           }
+       console.log("Json length: "+countElemFromJson);
+       console.log("Page length: "+countElemFromPage);
+       }
+   );
+}), 3000);
+//----------------------------------------------------------------------
 
-        })
-        console.log(data.length);
-    });
-}),5000);
-
-// window.onload = function(){
-//     var  dataJson = '[{\n' +
-//         '  "author": "user0",\n' +
-//         '  "text": "cxcxcx"\n' +
-//         '},{\n' +
-//         '"author": "RudeBot",\n' +
-//         '"text": "freak"\n' +
-//         '},{\n' +
-//         '"author": "RudeBot",\n' +
-//         '"text": "idiot"\n' +
-//         '}]';
-//     function foo() {
-//         var ourData = JSON.parse(dataJson);
-//         console.log(ourData.length);
-//     }
-//     setInterval(foo, 5000);
-// };
-//----------------------------------------------------------------------------
-
+//
+// var arr = ["Я", "сейчас", "изучаю", "JavaScript"];
+//
+// // удалить 2 первых элемента
+// var removed = arr.splice(0, 2);
+//
+// alert( removed ); // "Я", "сейчас" <-- array of removed elements

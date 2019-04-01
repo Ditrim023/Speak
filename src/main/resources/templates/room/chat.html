@@ -8,9 +8,9 @@
 <div th:replace="/fragments/sidebar :: bar"></div>
 <!--<div th:replace="/room/table-chat :: chat"></div>-->
 <div id="messages">
-    <table class="table">
+    <table class="table" id="out">
         <tbody class="js-pscroll">
-        <tr id="out" th:each="comment : ${comments}">
+        <tr th:each="comment : ${comments}">
             <td><a th:text="*{comment.author}"></a>: <span th:text="*{comment.text}"></span></td>
         </tr>
         </tbody>
