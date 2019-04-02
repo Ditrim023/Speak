@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.thymeleaf.exceptions.TemplateInputException;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -29,21 +28,24 @@ public class AjaxController {
     @RequestMapping(value = "/answer-from-bot/{id}", method = RequestMethod.GET)
     public final void addPhrase(@PathVariable("id") final Long id) throws TemplateInputException {
         try {
-            Thread.sleep(2000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        long i = 1L + (long) (Math.random() * (8L - 1L));
-        final String phraseFromBot = phraseRepository.findOne(i).getText();
-        roomService.saveCommentFromBot(id, phraseFromBot);
+
+        if (id==1){
+            long i = 1L + (long) (Math.random() * (8L - 1L));
+            final String phraseFromBot = phraseRepository.findOne(i).getText();
+            roomService.saveCommentFromBot(id, phraseFromBot);
+        }
     }
 
 
     @ResponseBody
-    @RequestMapping(value = "/json/1room", method = RequestMethod.GET)
-    public final String getJson() throws IOException {
+    @RequestMapping(value = "/json/{id}", method = RequestMethod.GET)
+    public final String getJson(@PathVariable("id") final Long id) throws IOException {
         StringBuffer fileData = new StringBuffer();
-        BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/templates/json/1room.json"));
+        BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/templates/json/"+id+"room.json"));
         char[] buf = new char[1024];
         int numRead = 0;
         while ((numRead = reader.read(buf)) != -1) {

@@ -8,4 +8,3 @@ function getIdRoom(index) {
         });
 
 }
-

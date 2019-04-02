@@ -24,27 +24,20 @@
 //---------------------------------------------------------------------
 
 setInterval((function () {
-   $.getJSON('http://localhost:8080/json/1room', function (data) {
-       var countElemFromJson = data.length;
-       var countElemFromPage = document.getElementById('out').getElementsByTagName('tr').length;
-       if (countElemFromJson != countElemFromPage) {
-           var diff = countElemFromJson - countElemFromPage;
-           var result = data.slice(-diff);
-               $.each(result, function (key, value) {
-                   $('#out').append('<tr>'+'<td>'+'<a>' + value.author +'</a>'+ ': ' +'<span>'+ value.text + '</span>'+'</td>'+'</tr>'+'<br>');
-               })
-           }
-       console.log("Json length: "+countElemFromJson);
-       console.log("Page length: "+countElemFromPage);
-       }
+    var id = document.getElementById('idRoom').value;
+   $.getJSON('http://localhost:8080/json/'+id, function (data) {
+        var countElemFromJson = data.length;
+        var countElemFromPage = document.getElementById('out').getElementsByTagName('tr').length;
+        if (countElemFromJson != countElemFromPage) {
+            var diff = countElemFromJson - countElemFromPage;
+            var result = data.slice(-diff);
+            $.each(result, function (key, value) {
+                $('#out').append('<tr>'+'<td>'+'<a>' + value.author +'</a>'+ ': ' +'<span>'+ value.text + '</span>'+'</td>'+'</tr>'+'<br>');
+            })
+        }
+
+    }
    );
-}), 3000);
+}), 4000);
 //----------------------------------------------------------------------
 
-//
-// var arr = ["Я", "сейчас", "изучаю", "JavaScript"];
-//
-// // удалить 2 первых элемента
-// var removed = arr.splice(0, 2);
-//
-// alert( removed ); // "Я", "сейчас" <-- array of removed elements

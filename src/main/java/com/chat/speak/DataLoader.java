@@ -59,7 +59,6 @@ public class DataLoader implements ApplicationRunner {
 
     public void insertRooms() {
         roomList.add(new Room("Rude"));
-        roomList.add(new Room("Soft"));
         roomList.add(new Room("Room"));
         roomRepository.save(roomList);
     }
