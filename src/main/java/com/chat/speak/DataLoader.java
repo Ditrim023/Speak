@@ -6,12 +6,15 @@ import com.chat.speak.repository.PhraseRepository;
 import com.chat.speak.repository.RoomRepository;
 import com.chat.speak.repository.UserRoleRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -39,6 +42,7 @@ public class DataLoader implements ApplicationRunner {
         insertRooms();
         insertUsers();
         insertPhrases();
+        clean();
     }
 
     public void insertUsers() {
@@ -63,10 +67,6 @@ public class DataLoader implements ApplicationRunner {
         roomRepository.save(roomList);
     }
 
-//    public void insertRoomBots(){
-//        RoomBot roomBotRude = new RoomBot();
-//        roomBotRepository.save(roomBotRude);
-//    }
 
     public void insertPhrases() {
         rudePhrases.add(new Phrase("back off!"));
@@ -78,5 +78,12 @@ public class DataLoader implements ApplicationRunner {
         rudePhrases.add(new Phrase("are you nuts?"));
         rudePhrases.add(new Phrase("Fuck off!"));
         phraseRepository.save(rudePhrases);
+    }
+    public void clean(){
+        try {
+            FileUtils.cleanDirectory(new File("src/main/resources/templates/json"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
