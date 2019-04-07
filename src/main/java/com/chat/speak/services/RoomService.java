@@ -48,7 +48,7 @@ public class RoomService {
         addJson(roomId);
     }
 
-    public void addJson(final Long id) {
+    private void addJson(final Long id) {
         List<Comment> commentList = commentRepository.findAllUserByRoleId(id);
         Gson GSON = new GsonBuilder().setPrettyPrinting().create();
         CommentJsonData commentJsonData = new CommentJsonData();

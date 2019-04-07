@@ -52,7 +52,7 @@ public class ProfileConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/css/**", "/images/**");
     }
 
-    public BCryptPasswordEncoder getPasswordEncoder() {
+    private BCryptPasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder(10);
     }
 }

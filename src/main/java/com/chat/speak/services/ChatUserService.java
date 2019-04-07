@@ -38,8 +38,8 @@ public class ChatUserService {
         return chatUserRepository.findChatUserByLogin(name);
     }
 
-    public final ChatUser save(ChatUser chatUser) {
-        return chatUserRepository.save(chatUser);
+    public final void save(ChatUser chatUser) {
+         chatUserRepository.save(chatUser);
     }
 
     public final ChatUser findChatUserByToken(String token) {

@@ -45,7 +45,7 @@ public class AjaxController {
     @ResponseBody
     @RequestMapping(value = "/json/{id}", method = RequestMethod.GET)
     public final String getJson(@PathVariable("id") final Long id){
-        StringBuffer fileData = new StringBuffer();
+        StringBuilder fileData = new StringBuilder();
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(new FileReader("src/main/resources/templates/json/"+id+"room.json"));

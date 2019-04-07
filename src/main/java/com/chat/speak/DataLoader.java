@@ -32,9 +32,9 @@ public class DataLoader implements ApplicationRunner {
     private final PhraseRepository phraseRepository;
     private final UserRole admin = new UserRole("ROLE_ADMIN");
     private final UserRole chatUser = new UserRole("ROLE_USER");
-    final List<Room> roomList = new ArrayList<>();
-    final List<ChatUser> chatUsers = new ArrayList<>();
-    final List<Phrase> rudePhrases = new LinkedList<>();
+    private final List<Room> roomList = new ArrayList<>();
+    private final List<ChatUser> chatUsers = new ArrayList<>();
+    private final List<Phrase> rudePhrases = new LinkedList<>();
 
     @Override
     public void run(ApplicationArguments applicationArguments) {
@@ -45,7 +45,7 @@ public class DataLoader implements ApplicationRunner {
         clean();
     }
 
-    public void insertUsers() {
+    private void insertUsers() {
         ChatUser chatUser1 = new ChatUser("user0", "ditrim023@ukr.net", Gender.MALE, new BCryptPasswordEncoder(10).encode("123456"), true, UUID.randomUUID().toString());
         chatUser1.setRole(userRoleRepository.findOne(1L));
         chatUsers.add(chatUser1);
@@ -56,19 +56,19 @@ public class DataLoader implements ApplicationRunner {
 
     }
 
-    public void insertRoles() {
+    private void insertRoles() {
         userRoleRepository.save(admin);
         userRoleRepository.save(chatUser);
     }
 
-    public void insertRooms() {
+    private void insertRooms() {
         roomList.add(new Room("Rude"));
         roomList.add(new Room("Room"));
         roomRepository.save(roomList);
     }
 
 
-    public void insertPhrases() {
+    private void insertPhrases() {
         rudePhrases.add(new Phrase("back off!"));
         rudePhrases.add(new Phrase("moron"));
         rudePhrases.add(new Phrase("idiot"));
@@ -79,7 +79,7 @@ public class DataLoader implements ApplicationRunner {
         rudePhrases.add(new Phrase("Fuck off!"));
         phraseRepository.save(rudePhrases);
     }
-    public void clean(){
+    private void clean(){
         try {
             FileUtils.cleanDirectory(new File("src/main/resources/templates/json"));
         } catch (IOException e) {
